@@ -13,6 +13,17 @@ body {
   background-image: url("/img/bg.jpg");
   background-position: top center;
   background-repeat: no-repeat;
+
+  /* Временные стили */
+  background-color: #222;
+  /* background-image: url(/img/barbershop-index-grid.jpg); */
+  background-size: 1122px auto;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
+.main-header-logo {
+  border: 2px solid red; /* block outline */
 }
 
 .inner-page {
@@ -50,13 +61,12 @@ a {
   font-size: 16px;
   line-height: 20px;
   color: #ffffff;
-
-  background-color: #000000;
 }
 
 .site-navigation,
 .user-navigation {
   list-style: none;
+  border: 2px solid red; /* block outline */
 }
 
 .site-navigation a,
@@ -362,4 +372,121 @@ a {
 .restore:hover,
 .restore:focus {
   text-decoration: none;
+}
+
+/* Сеточные стили */
+html,
+body {
+  min-width: 1122px;
+  min-height: 1750px;
+}
+
+.container {
+  width: 940px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.main-navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-navigation-wrapper {
+  width: 100%;
+  margin-bottom: 60px;
+
+  background-color: #000000;
+}
+
+.main-navigation-wrapper .container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.site-navigation {
+  margin: 0;
+  padding: 0;
+}
+
+.user-navigation {
+  margin: 0;
+  padding: 0;
+}
+
+.main-header-logo {
+  order: 2;
+}
+
+.features {
+  margin-bottom: 80px;
+}
+
+.features-list {
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.feature-item {
+  width: 300px;
+  border: 2px solid red; /* block outline */
+}
+
+.news {
+  border: 2px solid red; /* block outline */
+  width: 380px;
+}
+
+.gallery {
+  border: 2px solid red; /* block outline */
+  width: 300px;
+}
+
+.index-columns {
+  display: flex;
+  justify-content: space-between;
+  padding: 50px 80px;
+  margin-bottom: 35px;
+}
+
+.contacts {
+  border: 2px solid red; /* block outline */
+  width: 380px;
+}
+
+.appointment {
+  border: 2px solid red; /* block outline */
+  width: 300px;
+}
+
+.main-footer {
+  padding: 60px;
+  margin-top: 65px;
+}
+
+.main-footer .container {
+  display: flex;
+}
+
+.footer-contacts {
+  width: 320px;
+  margin: 0;
+  margin-right: 80px;
+  border: 2px solid red; /* block outline */
+}
+
+.footer-social {
+  width: 145px;
+  border: 2px solid red; /* block outline */
+}
+
+.footer-copyright {
+  width: 150px;
+  border: 2px solid red; /* block outline */
+  margin: 0;
+  margin-left: auto;
 }
