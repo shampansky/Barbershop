@@ -157,6 +157,7 @@ input[type="radio"].visually-hidden {
 
   vertical-align: middle;
   color: #ffffff;
+  border-bottom: 4px solid transparent;
 }
 
 .site-navigation a:hover,
