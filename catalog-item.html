@@ -7,7 +7,7 @@
     <title>Барбершоп «Бородинский»</title>
     <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700&amp;subset=cyrillic" rel="stylesheet">
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
   </head>
 
 <body class="inner-page">
@@ -118,40 +118,96 @@
 
       <p class="footer-copyright">
         <b>Разработано:</b>
-        <a class="button" href="#">HTML Academy</a>
+        <a class="button" href="https://github.com/shampansky">Евгений Шадрин</a>
       </p>
     </div>
 </footer>
 
-  <section class="modal modal-login">
-    <h2>Личный кабинет</h2>
-    <p>Введите свой логин и пароль</p>
-    <form class="login-form" action="https://echo.htmlacademy.ru" method="post">
-      <p>
-        <input class="login-icon-user" type="text" name="login" value="" placeholder="Логин">
-      </p>
-      <p>
-        <input class="login-icon-password" type="password" name="password" value="" placeholder="Пароль">
-      </p>
-      <p class="login-password-info">
-        <label class="login-checkbox">
-          <input class="visually-hidden" type="checkbox" name="remember">
-          Запомните меня
-        </label>
-        <a class="restore" href="#">Я забыл пароль</a>
-      </p>
-      <button class="button" type="submit">Войти</button>
-    </form>
-    <button class="modal-close" type="button">Закрыть</button>
-  </section>
-
-  <section>
-    <h2 class="visually-hidden">Как до нас добраться</h2>
+<section class="modal modal-login">
+  <h2>Личный кабинет</h2>
+  <p class="modal-description">Введите свой логин и пароль</p>
+  <form class="login-form" action="https://echo.htmlacademy.ru" method="post">
     <p>
-      <img src="img/map.jpg" width="780" height="560" alt="Офис компании по адресу ул. Большая Конюшенная 19/8, Санкт-Петербург">
+      <label class="visually-hidden" for="user-login">Логин</label>
+      <input class="login-icon-user" id="user-login" type="text" name="login" placeholder="Логин">
     </p>
-    <button class="modal-close" type="button">Закрыть</button>
-  </section>
+    <p>
+      <label class="visually-hidden" for="user-password">Пароль</label>
+      <input class="login-icon-password" id="user-password" type="password" name="password" placeholder="Пароль">
+    </p>
+    <p class="login-password-info">
+      <span class="remember-password-box">
+        <input class="visually-hidden" id="login-remember" type="checkbox" name="remember">
+        <label class="login-checkbox" for="login-remember">Запомните меня</label>
+      </span>
+
+      <a class="restore" href="#">Я забыл пароль</a>
+    </p>
+    <button class="button" type="submit">Войти</button>
+  </form>
+  <button class="modal-close" type="button">Закрыть</button>
+</section>
+
+<script>
+  var loginLink = document.querySelector(".login-link");
+  var loginPopup = document.querySelector(".modal-login");
+  var loginClose = loginPopup.querySelector(".modal-close");
+
+  var form = loginPopup.querySelector("form");
+  var login = loginPopup.querySelector("[name=login]")
+  var password = loginPopup.querySelector("[name=password]")
+
+  var isStorageSupport = true;
+  var storage = "";
+
+  try {
+    storage = localStorage.getItem("login");
+  } catch (err) {
+    isStorageSupport = false;
+  }
+
+  loginLink.addEventListener("click", function(evt) {
+    evt.preventDefault();
+    loginPopup.classList.add("modal-show");
+
+    if(storage) {
+      login.value = storage;
+      password.focus()
+    } else {
+      login.focus();
+    }
+
+  });
+
+  loginClose.addEventListener("click", function(evt) {
+    evt.preventDefault();
+    loginPopup.classList.remove("modal-show");
+    loginPopup.classList.remove("modal-error");
+  });
+
+  form.addEventListener("submit", function(evt) {
+    if (!login.value || !password.value) {
+      evt.preventDefault();
+      loginPopup.classList.remove("modal-error");
+      loginPopup.offsetWidth = loginPopup.offsetWidth;
+      loginPopup.classList.add("modal-error");
+    } else {
+      if (isStorageSupport) {
+        localStorage.setItem("login", login.value);
+      }
+    }
+  });
+
+  window.addEventListener("keydown", function(evt) {
+    if (evt.keyCode === 27) {
+      evt.preventDefault();
+      if (loginPopup.classList.contains("modal-show")) {
+        loginPopup.classList.remove("modal-show");
+        loginPopup.classList.remove("modal-error");
+      }
+    }
+  });
+  </script>
 
 </body>
 </html>

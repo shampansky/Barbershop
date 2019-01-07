@@ -3,7 +3,7 @@
 html,
 body {
   min-width: 1122px;
-  min-height: 1750px;
+  /* min-height: 1750px; */
 }
 
 body {
@@ -18,7 +18,7 @@ body {
   text-transform: uppercase;
 
   background-color: #000000;
-  background-image: url("/img/bg.jpg");
+  background-image: url("../img/bg.jpg");
   background-position: top center;
   background-repeat: no-repeat;
 }
@@ -198,7 +198,7 @@ input[type="radio"].visually-hidden {
   width: 16px;
   height: 18px;
 
-  background-image: url("/img/login.svg");
+  background-image: url("../img/login.svg");
   background-repeat: no-repeat;
   background-position: 0 0;
   opacity: 0.3;
@@ -286,8 +286,8 @@ input[type="radio"].visually-hidden {
 
   background-color: #f8f5f2;
   background-image:
-  url("/img/line.png"),
-  url("/img/pattern-light.jpg");
+  url("../img/line.png"),
+  url("../img/pattern-light.jpg");
   background-position: center, 0 0;
   background-repeat: no-repeat, repeat;
 }
@@ -373,6 +373,10 @@ input[type="radio"].visually-hidden {
   margin-bottom: 20px;
 }
 
+.contacts .contact-phone {
+  color: #000000;
+}
+
 .appointment {
   width: 300px;
 }
@@ -429,7 +433,7 @@ input[type="radio"].visually-hidden {
   color: #000000;
 
   background-color: #f8f5f2;
-  background-image: url("/img/pattern-light.jpg");
+  background-image: url("../img/pattern-light.jpg");
   background-position: 0 0;
   background-repeat: repeat;
 }
@@ -572,7 +576,7 @@ input[type="radio"].visually-hidden {
   width: 12px;
   height: 12px;
 
-  background-image: url("/img/cross.svg");
+  background-image: url("../img/cross.svg");
   background-repeat: no-repeat;
   background-position: 0 0;
 }
@@ -1014,6 +1018,46 @@ input[type="radio"].visually-hidden {
   margin-right: 80px;
 }
 
+@keyframes bounce {
+  0% {
+    transform: translateY(-2000px);
+  }
+
+  70% {
+    transform: translateY(30px);
+  }
+
+  90% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-10px);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(10px);
+  }
+}
+
 /* Футер
 ----------------------------------*/
 
@@ -1024,7 +1068,7 @@ input[type="radio"].visually-hidden {
   color: #ffffff;
 
   background-color: #232323;
-  background-image: url("/img/pattern-dark.jpg");
+  background-image: url("../img/pattern-dark.jpg");
   background-position: 0 0;
   background-repeat: repeat;
 }
@@ -1105,7 +1149,7 @@ input[type="radio"].visually-hidden {
 }
 
 .footer-copyright {
-  width: 150px;
+  width: 160px;
   margin: 0;
   margin-left: auto;
 
@@ -1135,13 +1179,25 @@ input[type="radio"].visually-hidden {
 .modal {
   position: fixed;
 
+  display: none;
+
   color: #000000;
 
   background-color: #f8f5f2;
-  background-image: url("/img/pattern-light.jpg");
+  background-image: url("../img/pattern-light.jpg");
   background-position: 0 0;
   background-repeat: repeat;
   box-shadow: 0 30px 50px rgba(0, 0, 0, 0.75);
+}
+
+.modal-show {
+  display: block;
+
+  animation: bounce 0.3s;
+}
+
+.modal-error {
+  animation: shake 0.6s;
 }
 
 .modal h2 {
@@ -1165,7 +1221,6 @@ input[type="radio"].visually-hidden {
 .modal-login {
   top: 120px;
   left: 50%;
-  display: none;
 
   margin-left: -230px;
   width: 300px;
@@ -1199,13 +1254,13 @@ input[type="radio"].visually-hidden {
 }
 
 .login-icon-user {
-  background-image: url("/img/user.svg");
+  background-image: url("../img/user.svg");
   background-position: 270px center;
   background-repeat: no-repeat;
 }
 
 .login-icon-password {
-  background-image: url("/img/lock.svg");
+  background-image: url("../img/lock.svg");
   background-position: 270px center;
   background-repeat: no-repeat;
 }
@@ -1241,7 +1296,7 @@ input[type="radio"].visually-hidden {
   width: 12px;
   height: 12px;
 
-  background-image: url("/img/cross.svg");
+  background-image: url("../img/cross.svg");
   background-repeat: no-repeat;
   background-position: 0 0;
 
@@ -1268,8 +1323,6 @@ input[type="radio"].visually-hidden {
 }
 
 .modal-map {
-  display: none;
-
   top: 50%;
   left: 50%;
 
@@ -1282,7 +1335,19 @@ input[type="radio"].visually-hidden {
   border: 7px solid white;
 }
 
+.modal-map iframe {
+  position: relative;
+  z-index: 2;
+
+  border: none;
+}
+
 .modal-map p {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
   margin: 0;
 }
 

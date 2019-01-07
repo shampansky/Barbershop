@@ -97,7 +97,7 @@
         <p>
           Барбершоп «Бородинский»
           <br> Адрес: г. Санкт-петербург, б. Конюшенная, д. 19/8
-          <br> Телефон: <a href="tel:+74956660266">+7 (495) 666-02-66</a>
+          <br> Телефон: <a class="contact-phone" href="tel:+74956660266">+7 (495) 666-02-66</a>
         </p>
 
         <p>
@@ -105,7 +105,7 @@
           <br> Пн—пт: с 10:00 до 22:00
           <br> Сб—вс: с 10:00 до 19:00
         </p>
-        <a class="button" href="map.html">Как проехать</a>
+        <a class="button contacts-button-map" href="map.html">Как проехать</a>
         <a class="button" href="contacts.html">Обратная связь</a>
       </section>
 
@@ -169,7 +169,7 @@
 
       <p class="footer-copyright">
         <b>Разработано:</b>
-        <a class="button" href="#">HTML Academy</a>
+        <a class="button" href="https://github.com/shampansky">Евгений Шадрин</a>
       </p>
     </div>
 </footer>
@@ -201,19 +201,97 @@
 
 <section class="modal modal-map">
   <h2 class="visually-hidden">Как до нас добраться</h2>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1998.6037872533207!2d30.320858716254055!3d59.938716481876256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4696310fca145cc1%3A0x42b32648d8238007!2z0JHQvtC70YzRiNCw0Y8g0JrQvtC90Y7RiNC10L3QvdCw0Y8g0YPQuy4sIDE5LzgsINCh0LDQvdC60YIt0J_QtdGC0LXRgNCx0YPRgNCzLCAxOTExODY!5e0!3m2!1sru!2sru!4v1546848990340" width="766" height="560" frameborder="0" style="border:0" allowfullscreen></iframe>
   <p>
     <img src="img/map.jpg" width="766" height="560" alt="Офис компании по адресу ул. Большая Конюшенная 19/8, Санкт-Петербург">
   </p>
   <button class="modal-close" type="button">Закрыть</button>
 </section>
 
-<script type="text/javascript">
-  var link = document.querySelector(".login-link");
+<script>
+  var loginLink = document.querySelector(".login-link");
+  var loginPopup = document.querySelector(".modal-login");
+  var loginClose = loginPopup.querySelector(".modal-close");
 
-  link.addEventListener("click", function(evt) {
-    evt.preventDefault;
-    console.log("Кнопка работает");
+  var form = loginPopup.querySelector("form");
+  var login = loginPopup.querySelector("[name=login]")
+  var password = loginPopup.querySelector("[name=password]")
+
+  var isStorageSupport = true;
+  var storage = "";
+
+  try {
+    storage = localStorage.getItem("login");
+  } catch (err) {
+    isStorageSupport = false;
+  }
+
+  loginLink.addEventListener("click", function(evt) {
+    evt.preventDefault();
+    loginPopup.classList.add("modal-show");
+
+    if(storage) {
+      login.value = storage;
+      password.focus()
+    } else {
+      login.focus();
+    }
+
   });
+
+  loginClose.addEventListener("click", function(evt) {
+    evt.preventDefault();
+    loginPopup.classList.remove("modal-show");
+    loginPopup.classList.remove("modal-error");
+  });
+
+  form.addEventListener("submit", function(evt) {
+    if (!login.value || !password.value) {
+      evt.preventDefault();
+      loginPopup.classList.remove("modal-error");
+      loginPopup.offsetWidth = loginPopup.offsetWidth;
+      loginPopup.classList.add("modal-error");
+    } else {
+      if (isStorageSupport) {
+        localStorage.setItem("login", login.value);
+      }
+    }
+  });
+
+  window.addEventListener("keydown", function(evt) {
+    if (evt.keyCode === 27) {
+      evt.preventDefault();
+      if (loginPopup.classList.contains("modal-show")) {
+        loginPopup.classList.remove("modal-show");
+        loginPopup.classList.remove("modal-error");
+      }
+    }
+  });
+
+
+var mapLink = document.querySelector(".contacts-button-map");
+var mapPopup = document.querySelector(".modal-map");
+var mapClose = mapPopup.querySelector(".modal-close");
+
+  mapLink.addEventListener("click", function(evt) {
+    evt.preventDefault();
+    mapPopup.classList.add("modal-show");
+  });
+
+  mapClose.addEventListener("click", function(evt) {
+    evt.preventDefault();
+    mapPopup.classList.remove("modal-show");
+  });
+
+  window.addEventListener("keydown", function(evt) {
+    if (evt.keyCode === 27) {
+      evt.preventDefault();
+      if (popup.classList.contains("modal-show")) {
+        popup.classList.remove("modal-show");
+      }
+    }
+  });
+
 </script>
 
 </body>

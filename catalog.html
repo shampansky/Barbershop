@@ -252,7 +252,7 @@
 
       <p class="footer-copyright">
         <b>Разработано:</b>
-        <a class="button" href="#">HTML Academy</a>
+        <a class="button" href="https://github.com/shampansky">Евгений Шадрин</a>
       </p>
     </div>
 </footer>
@@ -282,13 +282,66 @@
   <button class="modal-close" type="button">Закрыть</button>
 </section>
 
-<section class="modal modal-map">
-  <h2 class="visually-hidden">Как до нас добраться</h2>
-  <p>
-    <img src="img/map.jpg" width="766" height="560" alt="Офис компании по адресу ул. Большая Конюшенная 19/8, Санкт-Петербург">
-  </p>
-  <button class="modal-close" type="button">Закрыть</button>
-</section>
+<script>
+  var loginLink = document.querySelector(".login-link");
+  var loginPopup = document.querySelector(".modal-login");
+  var loginClose = loginPopup.querySelector(".modal-close");
+
+  var form = loginPopup.querySelector("form");
+  var login = loginPopup.querySelector("[name=login]")
+  var password = loginPopup.querySelector("[name=password]")
+
+  var isStorageSupport = true;
+  var storage = "";
+
+  try {
+    storage = localStorage.getItem("login");
+  } catch (err) {
+    isStorageSupport = false;
+  }
+
+  loginLink.addEventListener("click", function(evt) {
+    evt.preventDefault();
+    loginPopup.classList.add("modal-show");
+
+    if(storage) {
+      login.value = storage;
+      password.focus()
+    } else {
+      login.focus();
+    }
+
+  });
+
+  loginClose.addEventListener("click", function(evt) {
+    evt.preventDefault();
+    loginPopup.classList.remove("modal-show");
+    loginPopup.classList.remove("modal-error");
+  });
+
+  form.addEventListener("submit", function(evt) {
+    if (!login.value || !password.value) {
+      evt.preventDefault();
+      loginPopup.classList.remove("modal-error");
+      loginPopup.offsetWidth = loginPopup.offsetWidth;
+      loginPopup.classList.add("modal-error");
+    } else {
+      if (isStorageSupport) {
+        localStorage.setItem("login", login.value);
+      }
+    }
+  });
+
+  window.addEventListener("keydown", function(evt) {
+    if (evt.keyCode === 27) {
+      evt.preventDefault();
+      if (loginPopup.classList.contains("modal-show")) {
+        loginPopup.classList.remove("modal-show");
+        loginPopup.classList.remove("modal-error");
+      }
+    }
+  });
+  </script>
 
 </body>
 </html>
